@@ -1,0 +1,1 @@
+# Why .NET has wrong implicit conversations
