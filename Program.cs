@@ -34,11 +34,11 @@
 
             Console.WriteLine();
             Console.WriteLine("This is how a floating point number behaves when it loses precision:");
-            PringSomeStuff(10, IntegerInFloatMax);
+            PringSomeStuffFloatLong(10, IntegerInFloatMax);
 
             Console.WriteLine();
             Console.WriteLine("This is how a floating point number behaves without loses precision:");
-            PringSomeStuff(10, IntegerInFloatMax >> 1);
+            PringSomeStuffFloatLong(10, IntegerInFloatMax >> 1);
 
             // Lets try to find maximun integer value that double can hold
             Console.WriteLine("\nChecking for Double: maximum integer value without loss data:");
@@ -75,9 +75,9 @@
             //
             Console.WriteLine(
                 $"\nGreat, right? Everything works, but let's represent the double number in scientific notation:");
-            PringSomeStuff(10, long.MaxValue - 10);
+            PringSomeStuffDoubleLong(10, (long.MaxValue) - 10);
             Console.WriteLine();
-            PringSomeStuffUlong(10, ulong.MaxValue - 10);
+            PringSomeStuffDoubleUlong(10, (ulong.MaxValue) - 10);
 
             /*Since the loss of precision is visible in exponential notation,
              * we can conclude that .NET uses optimizations in special cases, leading us to believe that no data loss occurs.
@@ -86,7 +86,7 @@
             * then I consider the implicit conversion of an 8-byte integer to a 4-byte floating-point number
             * to be the height of impudence and a violation of all possible programming conventions.*/
 
-            void PringSomeStuff(long delta, long value)
+            void PringSomeStuffFloatLong(long delta, long value)
             {
                 for (long i = -delta; i <= delta; i++)
                 {
@@ -94,11 +94,19 @@
                 }
             }
 
-            void PringSomeStuffUlong(ulong delta, ulong value)
+            void PringSomeStuffDoubleLong(long delta, long value)
+            {
+                for (long i = -delta; i <= delta; i++)
+                {
+                    Console.WriteLine($"{(value + i):D20}\t\t{(double)(value + i):E25}");
+                }
+            }
+
+            void PringSomeStuffDoubleUlong(ulong delta, ulong value)
             {
                 for (ulong i = 0; i <= delta; i++)
                 {
-                    Console.WriteLine($"{(value + i):D20}\t\t{(float)(value + i):E25}");
+                    Console.WriteLine($"{(value + i):D20}\t\t{(double)(value + i):E25}");
                 }
             }
         }
